@@ -1,7 +1,6 @@
 class Derbent < Formula
   desc "One guarded pass for all your coding agents' tool calls"
   homepage "https://github.com/tunahanaliozturk/derbent"
-  version "1.0.0"
   license "Apache-2.0"
 
   on_macos do
