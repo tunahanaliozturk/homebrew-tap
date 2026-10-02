@@ -1,0 +1,29 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Set up Homebrew with this tap
+        uses: Homebrew/actions/setup-homebrew@main
+      - name: Audit
+        run: brew audit --strict --formula tunahanaliozturk/tap/derbent
+      - name: Install
+        run: brew install --build-from-source tunahanaliozturk/tap/derbent
+      - name: Test
+        run: brew test tunahanaliozturk/tap/derbent
+      - name: Run
+        run: derbent version
